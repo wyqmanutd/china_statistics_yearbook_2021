@@ -17,9 +17,10 @@ class Statistic_Yearbook_2021():
         "Content-Type": "text/html",
     }   
     
-    def __init__(self):
+    def __init__(self,download_folder="已下载"):
         super(Statistic_Yearbook_2021,self).__init__()
-        os.makedirs(os.path.join(self.root,"已下载"),exist_ok=True)
+        self.download_folder = os.path.join(self.root,self.download_folder)
+        os.makedirs(self.download_folder,exist_ok=True) # 创建下载文件默认文件夹
         self.html = self.html_etree_index
         self.urls = self.files_urls
         self.filter_titles()
@@ -90,7 +91,7 @@ class Statistic_Yearbook_2021():
         def combine_unit_url(i):
             file_name = self.files_titles_filtered[i]
             file_extension = self.files_urls[i].split(".")[-1]
-            return os.path.join(self.root,"已下载",file_name + "." + file_extension)
+            return os.path.join(self.download_folder,file_name + "." + file_extension)
         return [combine_unit_url(i) for i in range(len(self.files_urls))]
     
     

@@ -19,6 +19,9 @@ def func(i):
   
 @snoop
 def main():
+    """
+    线程池下载全部
+    """
     start = time.time()
     with ThreadPoolExecutor(max_workers=5) as executor:
         threads_list = []
@@ -35,22 +38,21 @@ def main():
     dauer = format(end-start,".2f")
     print(f"耗时：{dauer}s")    
 
-@snoop
-def main_1():
-    start = time.time()
-    for i in range(total):
-        func(i)
-        print(f"{i+1}/{total}: Threads Finished")
+# @snoop
+# def main_1():
+#     """
+#     单线程下载全部
+#     """              
+#     start = time.time()
+#     for i in range(total):
+#         func(i)
+#         print(f"{i+1}/{total}: Threads Finished")
         
-    end = time.time()
-    dauer = format(end-start,".2f")
-    print(f"耗时：{dauer}s")   
-
-
-
-
+#     end = time.time()
+#     dauer = format(end-start,".2f")
+#     print(f"耗时：{dauer}s")   
 
 if __name__ == '__main__':
-    # main()
-    main_1()
+    main()
+    # main_1()
     print("All Finished")
